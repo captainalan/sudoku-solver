@@ -1,5 +1,6 @@
 import unittest
 import sudoku
+import solver
 
 class TestSudokuMethods(unittest.TestCase):
 
@@ -142,6 +143,51 @@ class TestSudokuMethods(unittest.TestCase):
 
     def tearDown(self):
         pass
+
+class TestSolver(unittest.TestCase):
+
+    def setUp(self):
+        pass
+
+    def testSolver(self):
+        solution = sudoku.Puzzle(
+             [sudoku.Square([4,3,5,6,8,2,1,9,7]),
+              sudoku.Square([2,6,9,5,7,1,8,3,4]),
+              sudoku.Square([7,8,1,4,9,3,5,6,2]),
+              sudoku.Square([8,2,6,3,7,4,9,5,1]),
+              sudoku.Square([1,9,5,6,8,2,7,4,3]),
+              sudoku.Square([3,4,7,9,1,5,6,2,8]),
+              sudoku.Square([5,1,9,2,4,8,7,6,3]),
+              sudoku.Square([3,2,6,9,5,7,4,1,8]),
+              sudoku.Square([8,7,4,1,3,6,2,5,9])])
+
+        hasTwoUnknownsPuzzle = sudoku.Puzzle(
+             [sudoku.Square(['?',3,5,6,8,2,1,9,'?']),
+              sudoku.Square([2,6,9,5,7,1,8,3,4]),
+              sudoku.Square([7,8,1,4,9,3,5,6,2]),
+              sudoku.Square([8,2,6,3,7,4,9,5,1]),
+              sudoku.Square([1,9,5,6,8,2,7,4,3]),
+              sudoku.Square([3,4,7,9,1,5,6,2,8]),
+              sudoku.Square([5,1,9,2,4,8,7,6,3]),
+              sudoku.Square([3,2,6,9,5,7,4,1,8]),
+              sudoku.Square([8,7,4,1,3,6,2,5,9])])
+
+        hasFiveUnknownsPuzzle = sudoku.Puzzle(
+             [sudoku.Square(['?',3,5,6,8,2,1,9,'?']),
+              sudoku.Square([2,6,9,5,7,1,8,3,4]),
+              sudoku.Square([7,'?',1,4,9,3,5,6,2]),
+              sudoku.Square([8,2,6,3,7,4,9,5,1]),
+              sudoku.Square([1,9,5,6,8,2,7,4,3]),
+              sudoku.Square([3,4,7,9,1,'?',6,2,8]),
+              sudoku.Square([5,1,9,2,4,8,7,6,3]),
+              sudoku.Square([3,2,6,'?',5,7,4,1,8]),
+              sudoku.Square([8,7,4,1,3,6,2,5,9])])
+
+        self.assertEqual(solver.solveSudokuPuzzle(hasTwoUnknownsPuzzle).toList(),
+                         solution.toList())
+
+        self.assertEqual(solver.solveSudokuPuzzle(hasFiveUnknownsPuzzle).toList(),
+                         solution.toList())
 
 if __name__ == '__main__':
     unittest.main()
