@@ -8,6 +8,8 @@ hope).  I started this project while in an airplane racing against my
 girlfriend to solve a sudoku puzzle. She finished before I finished
 writing this program, lol.
 
+Heaven knows more Pythonic programs have been written.
+
 How it work?
 ------------
 
@@ -25,15 +27,15 @@ python solver.py
 
 ```
 
-(I have yet to implement a CLI...)
+CLI is yet to be implemented!
 
 Other Notes
 -----------
 
 ### O(???)
 
-As of now, I am employing random numbers/brute force to
-follows:
+As of now, I am employing random numbers/brute force to solve Puzzles
+as follows:
 
 1. For each square, gather the possible values that can complete that
    square.  For instance, a square with the values 1 and 2 filled in
