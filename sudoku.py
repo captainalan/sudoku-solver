@@ -76,29 +76,53 @@ class Puzzle:
             pass # Handle bad arguments
 
         # Convenient names for rows/columns
-        row1 = self.squares[0].row1 + self.squares[1].row1 + self.squares[2].row1
-        row2 = self.squares[0].row2 + self.squares[1].row2 + self.squares[2].row2
-        row3 = self.squares[0].row3 + self.squares[1].row3 + self.squares[2].row3
-        row4 = self.squares[3].row1 + self.squares[4].row1 + self.squares[5].row1
-        row5 = self.squares[3].row2 + self.squares[4].row2 + self.squares[5].row2
-        row6 = self.squares[3].row3 + self.squares[4].row3 + self.squares[5].row3
-        row7 = self.squares[6].row1 + self.squares[7].row1 + self.squares[8].row1
-        row8 = self.squares[6].row2 + self.squares[7].row2 + self.squares[8].row2
-        row9 = self.squares[6].row3 + self.squares[7].row3 + self.squares[8].row3
+        self.row1 = self.squares[0].row1 + self.squares[1].row1 + self.squares[2].row1
+        self.row2 = self.squares[0].row2 + self.squares[1].row2 + self.squares[2].row2
+        self.row3 = self.squares[0].row3 + self.squares[1].row3 + self.squares[2].row3
+        self.row4 = self.squares[3].row1 + self.squares[4].row1 + self.squares[5].row1
+        self.row5 = self.squares[3].row2 + self.squares[4].row2 + self.squares[5].row2
+        self.row6 = self.squares[3].row3 + self.squares[4].row3 + self.squares[5].row3
+        self.row7 = self.squares[6].row1 + self.squares[7].row1 + self.squares[8].row1
+        self.row8 = self.squares[6].row2 + self.squares[7].row2 + self.squares[8].row2
+        self.row9 = self.squares[6].row3 + self.squares[7].row3 + self.squares[8].row3
 
-        col1 = self.squares[0].col1 + self.squares[3].col1 + self.squares[6].col1
-        col2 = self.squares[0].col2 + self.squares[3].col2 + self.squares[6].col2
-        col3 = self.squares[0].col3 + self.squares[3].col3 + self.squares[6].col3
-        col4 = self.squares[1].col1 + self.squares[4].col1 + self.squares[7].col1
-        col5 = self.squares[1].col2 + self.squares[4].col2 + self.squares[7].col2
-        col6 = self.squares[1].col3 + self.squares[4].col3 + self.squares[7].col3
-        col7 = self.squares[2].col1 + self.squares[5].col1 + self.squares[8].col1
-        col8 = self.squares[2].col2 + self.squares[5].col2 + self.squares[8].col2
-        col9 = self.squares[2].col3 + self.squares[5].col3 + self.squares[8].col3
+        self.col1 = self.squares[0].col1 + self.squares[3].col1 + self.squares[6].col1
+        self.col2 = self.squares[0].col2 + self.squares[3].col2 + self.squares[6].col2
+        self.col3 = self.squares[0].col3 + self.squares[3].col3 + self.squares[6].col3
+        self.col4 = self.squares[1].col1 + self.squares[4].col1 + self.squares[7].col1
+        self.col5 = self.squares[1].col2 + self.squares[4].col2 + self.squares[7].col2
+        self.col6 = self.squares[1].col3 + self.squares[4].col3 + self.squares[7].col3
+        self.col7 = self.squares[2].col1 + self.squares[5].col1 + self.squares[8].col1
+        self.col8 = self.squares[2].col2 + self.squares[5].col2 + self.squares[8].col2
+        self.col9 = self.squares[2].col3 + self.squares[5].col3 + self.squares[8].col3
 
         # Convenient names for rows/columns together
-        self.rows = [row1, row2, row3, row4, row5, row6, row7, row8, row9]
-        self.cols = [col1, col2, col3, col4, col5, col6, col7, col8, col9]
+        self.rows = [self.row1, self.row2, self.row3,
+                     self.row4, self.row5, self.row6,
+                     self.row7, self.row8, self.row9]
+        self.cols = [self.col1, self.col2, self.col3,
+                     self.col4, self.col5, self.col6,
+                     self.col7, self.col8, self.col9]
+
+    def __str__(self):
+        args = self.row1 + self.row2 + self.row3\
+             + self.row4 + self.row5 + self.row6\
+             + self.row7 + self.row8 + self.row9
+
+        # Admittedly not the prettiest way to do things...
+        return """
+{} {} {} | {} {} {} | {} {} {}
+{} {} {} | {} {} {} | {} {} {}
+{} {} {} | {} {} {} | {} {} {}
+---------------------
+{} {} {} | {} {} {} | {} {} {}
+{} {} {} | {} {} {} | {} {} {}
+{} {} {} | {} {} {} | {} {} {}
+---------------------
+{} {} {} | {} {} {} | {} {} {}
+{} {} {} | {} {} {} | {} {} {}
+{} {} {} | {} {} {} | {} {} {}
+        """.format(*args)
 
     def isValid(self):
         """A valid Puzzle violates no constraints.
@@ -115,7 +139,7 @@ class Puzzle:
 
         # Then check rows/columns
         # This has to take in unknowns ('?') into account.
-        # Make sure all integers are unique; there can be multiple ?'s.
+        # Make sure all integers are unique though there can be multiple ?'s.
         for x in (self.rows + self.cols):
             if len(x) != 9:
                 return False
@@ -133,6 +157,3 @@ class Puzzle:
                 return False
         return True
 
-    def show(self):
-        # Function to print puzzle to standard output
-        pass
